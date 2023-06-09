@@ -32,6 +32,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun SpringAnimation() {
 
+    //https://blog.canopas.com/android-spring-fling-animation-in-jetpack-compose-64b2a2e54c88
     val scope = rememberCoroutineScope()
 
     val offset = remember { Animatable(Offset(0f, 0f), Offset.VectorConverter) }
@@ -86,7 +87,7 @@ fun SpringAnimation() {
             })
 
         Spacer(modifier = Modifier.height(30.dp))
-        
+
         Circle(modifier = Modifier
             .offset {
                 offset2.value.round()
