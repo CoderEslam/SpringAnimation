@@ -30,7 +30,7 @@ import com.doubleclick.springanimation.ui.theme.Teal200
 import kotlinx.coroutines.launch
 
 @Composable
-fun SpringAnimation() {
+fun SpringAnimation2() {
 
     //https://blog.canopas.com/android-spring-fling-animation-in-jetpack-compose-64b2a2e54c88
     val scope = rememberCoroutineScope()
@@ -64,23 +64,6 @@ fun SpringAnimation() {
                             )
                         )
                     }
-                    scope.launch {
-                        offset2.animateTo(
-                            offset.value + change.position, spring(
-                                dampingRatio = Spring.DampingRatioLowBouncy,
-                                stiffness = 100f
-                            )
-                        )
-                    }
-
-                    scope.launch {
-                        offset3.animateTo(
-                            offset.value + change.position, spring(
-                                dampingRatio = Spring.DampingRatioLowBouncy,
-                                stiffness = StiffnessVeryLow
-                            )
-                        )
-                    }
                 }
 
             })
@@ -91,15 +74,45 @@ fun SpringAnimation() {
             .offset {
                 offset2.value.round()
             }
-            .background(Purple500.copy(0.8f), CircleShape))
+            .background(Teal200, CircleShape)
+            .pointerInput(Unit) {
+                detectDragGestures { change, dragAmount ->
+                    change.consumeAllChanges()
 
+                    scope.launch {
+                        offset2.animateTo(
+                            offset2.value + change.position, spring(
+                                dampingRatio = Spring.DampingRatioLowBouncy,
+//                                stiffness = 100f
+                            )
+                        )
+                    }
+
+                }
+
+            })
 
         Spacer(modifier = Modifier.height(30.dp))
+
         Circle(modifier = Modifier
             .offset {
                 offset3.value.round()
             }
-            .background(Purple700.copy(0.3f), CircleShape))
+            .background(Teal200, CircleShape)
+            .pointerInput(Unit) {
+                detectDragGestures { change, dragAmount ->
+                    change.consumeAllChanges()
+                    scope.launch {
+                        offset3.animateTo(
+                            offset3.value + change.position, spring(
+                                dampingRatio = Spring.DampingRatioLowBouncy,
+//                                stiffness = StiffnessVeryLow
+                            )
+                        )
+                    }
+                }
+
+            })
     }
 }
 

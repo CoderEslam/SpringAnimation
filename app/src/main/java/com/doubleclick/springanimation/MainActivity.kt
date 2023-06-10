@@ -23,7 +23,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
 //                    Greeting("Android")
-                    SpringAnimation()
+//                    SpringAnimation2()
+                    SpringRelease()
                 }
             }
         }
